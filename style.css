@@ -1,8 +1,7 @@
 /* =========================================================
    DEGREE OF FREEDOM SIMULATION
    MOBILE-FIRST RESPONSIVE STYLE
-   Consistent typography
-   Phone → Tablet → iPad → Laptop/Desktop
+   Small phone → Large phone → Tablet → iPad → Laptop
    ========================================================= */
 
 
@@ -126,8 +125,6 @@ header p {
 
 /* =========================================================
    PANEL TITLES
-   IMPORTANT:
-   Prevent browser default h2/h3 sizes
    ========================================================= */
 
 .translation-panel h2,
@@ -137,6 +134,7 @@ header p {
 .rotation-panel h3,
 .control-panel h3 {
   font-size: clamp(16px, 4vw, 21px);
+
   line-height: 1.2;
 
   font-weight: 750;
@@ -177,7 +175,8 @@ header p {
 
 
 /* =========================================================
-   CANVAS
+   SIMULATION CANVAS
+   DEFAULT = SMALL PHONE
    ========================================================= */
 
 #translationCanvas,
@@ -186,7 +185,13 @@ header p {
 
   width: 100%;
 
-  height: clamp(180px, 48vw, 330px);
+  /*
+     SMALL MOBILE DIAGRAM
+     Deliberately short so the diagrams
+     do not dominate the phone screen.
+  */
+
+  height: 160px;
 
   background:
     linear-gradient(
@@ -204,8 +209,7 @@ header p {
 
 
 /* =========================================================
-   ALL NORMAL PANEL TEXT
-   Prevent accidental browser default sizing
+   NORMAL PANEL TEXT
    ========================================================= */
 
 .translation-panel p,
@@ -334,9 +338,6 @@ header p {
   border-top: 1px solid #edf0f5;
 }
 
-
-/* "Real Gas Examples" / section heading */
-
 .gas-examples h2,
 .gas-examples h3 {
   font-size: clamp(15px, 3.8vw, 19px);
@@ -349,9 +350,6 @@ header p {
 
   margin-bottom: 4px;
 }
-
-
-/* Gas type label */
 
 #gasTypeLabel {
   display: block;
@@ -368,9 +366,6 @@ header p {
 
   text-align: center;
 }
-
-
-/* Gas examples */
 
 #gasExamples {
   display: grid;
@@ -793,27 +788,36 @@ footer {
     border-radius: 10px;
   }
 
+  /*
+     VERY SMALL PHONE DIAGRAM
+  */
+
   #translationCanvas,
   #rotationCanvas {
-    height: 175px;
+    height: 145px;
   }
 
   #translationMode,
   #rotationMode {
     min-height: 32px;
+
     padding: 5px 7px;
+
     font-size: 13px;
   }
 
   #translationDescription,
   #rotationDescription {
     padding: 6px 8px;
+
     font-size: 11px;
   }
 
   #rotationExplanation {
     margin: 4px 6px 6px;
+
     padding: 5px 6px;
+
     font-size: 10px;
   }
 
@@ -823,6 +827,7 @@ footer {
 
   #rotationModeList div {
     padding: 4px 5px;
+
     font-size: 9px;
   }
 
@@ -845,11 +850,13 @@ footer {
 
   #gasExamples div {
     padding: 5px 2px;
+
     font-size: 8.5px;
   }
 
   #polyatomicNote {
     padding: 5px 6px;
+
     font-size: 8.5px;
   }
 
@@ -867,13 +874,17 @@ footer {
 
   select {
     min-height: 34px;
+
     padding: 5px 7px;
+
     font-size: 12px;
   }
 
   .dof-row {
     min-height: 30px;
+
     padding: 4px 6px;
+
     font-size: 10px;
   }
 
@@ -883,16 +894,19 @@ footer {
 
   #dofFormula {
     padding: 6px;
+
     font-size: 13px;
   }
 
   #moleculeDescription {
     padding: 6px;
+
     font-size: 9.5px;
   }
 
   button {
     min-height: 34px;
+
     font-size: 11px;
   }
 
@@ -903,19 +917,23 @@ footer {
 
 
 /* =========================================================
-   LARGE PHONE / SMALL TABLET
-   >= 600px
+   LARGE PHONE
+   600–767px
    ========================================================= */
 
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-width: 767px) {
 
   .container {
     padding: 12px;
   }
 
+  /*
+     Larger phone gets a moderately larger diagram.
+  */
+
   #translationCanvas,
   #rotationCanvas {
-    height: 280px;
+    height: 230px;
   }
 
   #rotationModeList {
@@ -925,6 +943,7 @@ footer {
 
   .control-panel {
     max-width: 700px;
+
     margin-left: auto;
     margin-right: auto;
   }
@@ -932,7 +951,7 @@ footer {
 
 
 /* =========================================================
-   TABLET
+   TABLET PORTRAIT
    >= 768px
    ========================================================= */
 
@@ -949,6 +968,10 @@ footer {
   .simulation-grid {
     gap: 13px;
   }
+
+  /*
+     Tablet gets the large diagram.
+  */
 
   #translationCanvas,
   #rotationCanvas {
@@ -984,6 +1007,12 @@ footer {
     font-size: 13px;
   }
 
+  /*
+     THREE COLUMN LAYOUT
+
+     Translation | Rotation | Controls
+  */
+
   .simulation-grid {
     grid-template-columns:
       minmax(0, 1.35fr)
@@ -995,9 +1024,13 @@ footer {
     gap: 9px;
   }
 
+  /*
+     LARGE iPAD DIAGRAM
+  */
+
   #translationCanvas,
   #rotationCanvas {
-    height: 285px;
+    height: 300px;
   }
 
   #rotationModeList {
@@ -1060,27 +1093,37 @@ footer {
     gap: 5px;
   }
 
+  /*
+     Short landscape phone.
+     Still smaller than iPad.
+  */
+
   #translationCanvas,
   #rotationCanvas {
-    height: 200px;
+    height: 190px;
   }
 
   #translationMode,
   #rotationMode {
     min-height: 28px;
+
     padding: 4px 6px;
+
     font-size: 11px;
   }
 
   #translationDescription,
   #rotationDescription {
     padding: 4px 6px;
+
     font-size: 9px;
   }
 
   #rotationExplanation {
     margin: 3px 5px;
+
     padding: 4px 5px;
+
     font-size: 8.5px;
   }
 
@@ -1090,6 +1133,7 @@ footer {
 
   #rotationModeList div {
     padding: 3px 4px;
+
     font-size: 8px;
   }
 
@@ -1103,11 +1147,13 @@ footer {
 
   #gasExamples div {
     padding: 3px 2px;
+
     font-size: 7.5px;
   }
 
   #polyatomicNote {
     padding: 3px 4px;
+
     font-size: 7.5px;
   }
 
@@ -1125,7 +1171,9 @@ footer {
 
   select {
     min-height: 30px;
+
     padding: 3px 6px;
+
     font-size: 10px;
   }
 
@@ -1135,6 +1183,7 @@ footer {
 
   .current-axis div {
     padding: 3px;
+
     font-size: 7.5px;
   }
 
@@ -1148,7 +1197,9 @@ footer {
 
   .dof-row {
     min-height: 26px;
+
     padding: 3px 5px;
+
     font-size: 8px;
   }
 
@@ -1158,30 +1209,39 @@ footer {
 
   #dofFormula {
     margin-top: 4px;
+
     padding: 4px;
+
     font-size: 12px;
   }
 
   #moleculeDescription {
     margin-top: 4px;
+
     padding: 4px;
+
     font-size: 8px;
   }
 
   .button-row {
     gap: 4px;
+
     margin-top: 4px;
   }
 
   button {
     min-height: 28px;
+
     padding: 3px 5px;
+
     font-size: 9px;
   }
 
   footer {
     margin-top: 4px;
+
     padding: 4px;
+
     font-size: 7.5px;
   }
 }
@@ -1218,6 +1278,10 @@ footer {
 
     gap: 15px;
   }
+
+  /*
+     LARGE LAPTOP DIAGRAM
+  */
 
   #translationCanvas,
   #rotationCanvas {
