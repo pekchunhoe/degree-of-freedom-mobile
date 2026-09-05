@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Degree of Freedom Simulation</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="simulation-container">
+
+        <!-- =====================================================
+             HEADER
+             ===================================================== -->
+
+        <header class="simulation-header">
+            <h1>Degree of Freedom</h1>
+            <p>
+                Molecular translation and rotation
+            </p>
+        </header>
+
+
+        <!-- =====================================================
+             MAIN 3-COLUMN LAYOUT
+             ===================================================== -->
+
+        <section class="simulation-grid">
+
+
+            <!-- =================================================
+                 COLUMN 1
+                 TRANSLATIONAL MOTION
+                 ================================================= -->
+
+            <section class="panel translation-panel">
+
+                <div class="panel-header">
+                    <h2>Translational Motion</h2>
+                    <span id="translationMode">
+                        Translation along X
+                    </span>
+                </div>
+
+
+                <!-- Translation visualization -->
+
+                <div class="visualization-area">
+
+                    <canvas
+                        id="translationCanvas"
+                        aria-label="Translational molecular motion"
+                    ></canvas>
+
+                </div>
+
+
+                <!-- Translation explanation -->
+
+                <div class="motion-description">
+                    <div class="motion-symbol translation-symbol">
+                        ↔
+                    </div>
+
+                    <div>
+                        <strong id="translationDescription">
+                            Translation along X
+                        </strong>
+
+                        <small>
+                            Molecule moves without rotating
+                        </small>
+                    </div>
+                </div>
+
+
+                <!-- =================================================
+                     REAL GAS EXAMPLES
+                     ================================================= -->
+
+                <div class="gas-examples">
+
+                    <div class="section-label">
+                        Real Gas Examples
+                    </div>
+
+                    <div
+                        id="gasTypeLabel"
+                        class="gas-type-label"
+                    >
+                        MONATOMIC GAS
+                    </div>
+
+                    <div
+                        id="gasExamples"
+                        class="gas-example-list"
+                    >
+
+                        <div class="gas-example">
+                            <span class="formula">He</span>
+                            <span class="gas-name">Helium</span>
+                        </div>
+
+                        <div class="gas-example">
+                            <span class="formula">Ne</span>
+                            <span class="gas-name">Neon</span>
+                        </div>
+
+                        <div class="gas-example">
+                            <span class="formula">Ar</span>
+                            <span class="gas-name">Argon</span>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="polyatomicNote"
+                        class="gas-note hidden"
+                    >
+                        Polyatomic example shown as a non-linear
+                        molecule for the rotational model.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 COLUMN 2
+                 ROTATIONAL MOTION
+                 ================================================= -->
+
+            <section class="panel rotation-panel">
+
+                <div class="panel-header">
+                    <h2>Rotational Motion</h2>
+
+                    <span id="rotationMode">
+                        Rotation about X
+                    </span>
+                </div>
+
+
+                <!-- Rotation visualization -->
+
+                <div class="visualization-area">
+
+                    <canvas
+                        id="rotationCanvas"
+                        aria-label="Rotational molecular motion"
+                    ></canvas>
+
+                </div>
+
+
+                <!-- Rotation explanation -->
+
+                <div class="motion-description">
+
+                    <div class="motion-symbol rotation-symbol">
+                        ↻
+                    </div>
+
+                    <div>
+
+                        <strong id="rotationDescription">
+                            Rotation about X
+                        </strong>
+
+                        <small id="rotationExplanation">
+                            Rotational motion about the selected axis
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Active rotational modes -->
+
+                <div class="rotation-info">
+
+                    <div class="section-label">
+                        Rotational Modes
+                    </div>
+
+                    <div
+                        id="rotationModeList"
+                        class="rotation-mode-list"
+                    >
+
+                        <span class="mode active">
+                            Rx
+                        </span>
+
+                        <span class="mode active">
+                            Ry
+                        </span>
+
+                        <span class="mode">
+                            Rz
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 COLUMN 3
+                 CONTROLS + DOF
+                 ================================================= -->
+
+            <aside class="panel control-panel">
+
+                <div class="panel-header">
+                    <h2>Controls</h2>
+                </div>
+
+
+                <!-- =================================================
+                     MOLECULE SELECTOR
+                     ================================================= -->
+
+                <div class="control-group">
+
+                    <label for="moleculeSelect">
+                        Molecule
+                    </label>
+
+                    <select id="moleculeSelect">
+
+                        <option value="monatomic">
+                            Monatomic
+                        </option>
+
+                        <option value="diatomic">
+                            Diatomic
+                        </option>
+
+                        <option value="polyatomic">
+                            Polyatomic
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- =================================================
+                     AXIS SELECTOR
+                     ================================================= -->
+
+                <div class="control-group">
+
+                    <label for="axisSelect">
+                        Demonstration Axis
+                    </label>
+
+                    <select id="axisSelect">
+
+                        <option value="x">
+                            X axis
+                        </option>
+
+                        <option value="y">
+                            Y axis
+                        </option>
+
+                        <option value="z">
+                            Z axis
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- =================================================
+                     DIVIDER
+                     ================================================= -->
+
+                <div class="control-divider"></div>
+
+
+                <!-- =================================================
+                     CURRENT DEMONSTRATION
+                     ================================================= -->
+
+                <div class="current-demo">
+
+                    <div class="section-label">
+                        Currently Demonstrating
+                    </div>
+
+                    <div class="demo-row">
+
+                        <span>
+                            Translation
+                        </span>
+
+                        <strong id="currentTranslationAxis">
+                            X
+                        </strong>
+
+                    </div>
+
+                    <div class="demo-row">
+
+                        <span>
+                            Rotation
+                        </span>
+
+                        <strong id="currentRotationAxis">
+                            X
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     DEGREE OF FREEDOM
+                     ================================================= -->
+
+                <div class="control-divider"></div>
+
+                <div class="dof-section">
+
+                    <div class="section-label">
+                        Degree of Freedom
+                    </div>
+
+
+                    <div class="dof-row">
+
+                        <span>
+                            Translational
+                        </span>
+
+                        <strong id="translationalDOF">
+                            3
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dof-row">
+
+                        <span>
+                            Rotational
+                        </span>
+
+                        <strong id="rotationalDOF">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dof-row total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="totalDOF">
+                            3
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     FORMULA
+                     ================================================= -->
+
+                <div class="formula-box">
+
+                    <div class="formula-label">
+                        Total Degree of Freedom
+                    </div>
+
+                    <div
+                        id="dofFormula"
+                        class="formula"
+                    >
+                        f = 3 + 0 = 3
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     MOLECULE INFORMATION
+                     ================================================= -->
+
+                <div class="molecule-info">
+
+                    <div class="section-label">
+                        Molecular Model
+                    </div>
+
+                    <div
+                        id="moleculeDescription"
+                        class="molecule-description"
+                    >
+                        Single spherical particle
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ANIMATION CONTROLS
+                     ================================================= -->
+
+                <div class="animation-controls">
+
+                    <button
+                        type="button"
+                        id="playPauseButton"
+                        aria-label="Pause simulation"
+                    >
+                        ❚❚
+                    </button>
+
+                    <button
+                        type="button"
+                        id="resetButton"
+                        aria-label="Reset simulation"
+                    >
+                        ↻ Reset
+                    </button>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- =====================================================
+             FOOTER / PHYSICS REMINDER
+             ===================================================== -->
+
+        <footer class="physics-footer">
+
+            <span>
+                Translational DOF:
+                <strong>3</strong>
+                &nbsp;(
+                x, y, z
+                )
+            </span>
+
+            <span class="footer-separator">
+                |
+            </span>
+
+            <span>
+                Total:
+                <strong>
+                    f = f<sub>trans</sub> + f<sub>rot</sub>
+                </strong>
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
